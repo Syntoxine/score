@@ -49,12 +49,12 @@
                         </tr>
                     {% endfor %}
                 {% elif view_type == "player" %}
-                    {% for entry, rank in entries %}
+                    {% for entry in entries %}
                         <tr>
                             <td>
                                 <a href="{% url "scoreboard:score" entry.score.name %}" class="text-decoration-none">{{ entry.score.name }}</a>
                             </td>
-                            <td>{{ rank }}</td>
+                            <td>{{ entry.rank }}</td>
                             <td>{{ entry.value }}</td>
                         </tr>
                     {% endfor %}

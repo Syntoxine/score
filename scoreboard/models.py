@@ -18,7 +18,8 @@ class Score(models.Model):
 class ScoreEntry(models.Model):
     player = models.ForeignKey(Player, on_delete=models.CASCADE)
     score = models.ForeignKey(Score, on_delete=models.CASCADE)
-    value = models.IntegerField()
+    value = models.IntegerField(default=0)
+    rank = models.IntegerField(default=1, editable=False)
 
     class Meta:
         constraints = [

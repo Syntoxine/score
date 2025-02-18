@@ -24,13 +24,9 @@ def score(request, score_name):
 def player(request, player_name):
     player = Player.objects.get(name=player_name)
     entries = ScoreEntry.objects.filter(player__id=player.id).order_by("-value")
-    ranked_entries = [
-        ScoreEntry.objects.filter(score=entry.score, value__gt=entry.value).count() + 1
-        for entry in entries
-    ]
     context = {
         "player": player,
-        "entries": zip(entries, ranked_entries),
+        "entries": entries,
         "view_type": "player",
     }
     return render(request, "scoreboard/detail.html", context=context)
