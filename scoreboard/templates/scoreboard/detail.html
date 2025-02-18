@@ -1,0 +1,66 @@
+{% extends "scoreboard/base.html" %}
+
+{% block title %}
+    {% if view_type == "score" %}
+        Score • {{ score.name }}
+    {% elif view_type == "player" %}
+        Player Scores • {{ player.name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col text-center">
+        <h1 class="rounded p-4 text-light bg-primary">
+            {% if view_type == "score" %}
+                {{ score.name }} Score
+            {% else %}
+                {{ player.name }}'s Scores
+            {% endif %}
+        </h1>
+    </div>
+</div>
+
+<div class="row p-4 justify-content-center">
+    <div class="col-lg-8 col-md-12">
+        <table class="table table-striped table-hover border">
+            <thead>
+                <tr>
+                    {% if view_type == "score" %}
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    {% elif view_type == "player" %}
+                        <th>Category</th>
+                        <th>Score</th>
+                        <th>Rank</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% if view_type == "score" %}
+                    {% for entry in entries %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <a href="{% url "scoreboard:player" entry.player.name %}" class="text-decoration-none">{{ entry.player.name }}</a>
+                            </td>
+                            <td>{{ entry.value }}</td>
+                        </tr>
+                    {% endfor %}
+                {% elif view_type == "player" %}
+                    {% for entry, rank in entries %}
+                        <tr>
+                            <td>
+                                <a href="{% url "scoreboard:score" entry.score.name %}" class="text-decoration-none">{{ entry.score.name }}</a>
+                            </td>
+                            <td>{{ entry.value }}</td>
+                            <td>{{ rank }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

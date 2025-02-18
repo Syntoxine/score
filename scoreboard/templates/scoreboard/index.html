@@ -3,14 +3,16 @@
 {% block title %}Scores{% endblock %}
 
 {% block content %}
-<main class="p-4 d-flex flex-column justify-content-center gap-4">
-    <div class="d-flex flex-column border p-4 rounded">
-        <h2>All Scores</h2>
+<div class="d-flex flex-wrap align-items-start gap-4">
+    <div class="card flex-grow-1">
+        <div class="card-header">
+            <h3 class="card-title pt-2">All Scores</h2>
+        </div>
         {% if scores %}
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
             {% for score in scores %}
             <li class="list-group-item">
-                <a href="{% url "scoreboard:score" score.name %}" class="fs-5">{{ score.name }}</a>
+                <a href="{% url "scoreboard:score" score.name %}">{{ score.name }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -20,13 +22,15 @@
             </div>
         {% endif %}
     </div>
-    <div class="d-flex flex-column border p-4 rounded">
-        <h2>All Players</h2>
+    <div class="card flex-grow-1">
+        <div class="card-header">
+            <h3 class="card-title pt-2">All Players</h2>
+        </div>
         {% if players %}
-        <ul class="list-group">
+        <ul class="list-group list-group-flush">
             {% for player in players %}
             <li class="list-group-item">
-                <a href="{% url "scoreboard:player" player.name %}" class="fs-5">{{ player.name }}</a>
+                <a href="{% url "scoreboard:player" player.name %}">{{ player.name }}</a>
             </li>
             {% endfor %}
         </ul>
@@ -36,5 +40,5 @@
             </div>
         {% endif %}
     </div>
-</main>
+</div>
 {% endblock %}
