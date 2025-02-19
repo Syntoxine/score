@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             row.innerHTML = `
                 <td>${entry.rank}</td>
-                <td><a href="/player/${entry.player__name}/" class="text-decoration-none">${entry.player__name}</a></td>
+                <td><a href="/p/${entry.player__name}/" class="text-decoration-none">${entry.player__name}</a></td>
                 <td>${entry.value}</td>
             `;
 
