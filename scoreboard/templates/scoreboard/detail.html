@@ -1,4 +1,6 @@
 {% extends "scoreboard/base.html" %}
+{% load static %}
+
 
 {% block title %}
     {% if view_type == "score" %}
@@ -23,7 +25,7 @@
 
 <div class="row py-4 justify-content-center">
     <div class="col-lg-8 col-md-12">
-        <table class="table table-striped table-hover border">
+        <table id="table" class="table table-striped table-hover border" data-score-id="{{ score.id }}">
             <thead>
                 <tr>
                     {% if view_type == "score" %}
@@ -40,8 +42,8 @@
             <tbody>
                 {% if view_type == "score" %}
                     {% for entry in entries %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
+                        <tr class="player-row" data-player-id="{{ entry.player.id }}">
+                            <td>{{ entry.rank }}</td>
                             <td>
                                 <a href="{% url "scoreboard:player" entry.player.name %}" class="text-decoration-none">{{ entry.player.name }}</a>
                             </td>
@@ -61,6 +63,22 @@
                 {% endif %}
             </tbody>
         </table>
+
+        {% if view_type == "score" %}
+        <div class="mt-4 p-3 border rounded">
+            <h5>Modify Score</h5>
+            <form id="score-modify-form">
+                {% csrf_token %}
+                <input type="hidden" id="selected-player-id" name="player_id" value="">
+                <div class="input-group">
+                    <button type="button" class="btn btn-danger" id="remove-score">Remove</button>
+                    <input type="number" id="score-change" class="form-control" name="value" value="1" min="1">
+                    <button type="button" class="btn btn-success" id="add-score">Add</button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
     </div>
 </div>
+<script src="{% static 'scoreboard/js/modify_score.js' %}"></script>
 {% endblock %}

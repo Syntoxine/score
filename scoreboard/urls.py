@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('s/<str:score_name>/', views.score, name='score'),
     path('p/<str:player_name>/', views.player, name='player'),
+    path('modify_score/', views.modify_score, name='modify_score'),
 ]

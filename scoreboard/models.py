@@ -29,4 +29,4 @@ class ScoreEntry(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.player} [{self.score}] ({self.value} points)"
+        return f"{self.player} [{self.score}] ({self.value} points, rank {self.rank})"

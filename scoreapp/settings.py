@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'scoreboard.apps.ScoreboardConfig',
+    'daphne',
+    'channels',
+    'scoreboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,6 +72,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'scoreapp.wsgi.application'
+
+ASGI_APPLICATION = 'scoreapp.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer" # Redis in production
+    }
+}
 
 
 # Database
