@@ -2,3 +2,6 @@
 secrets/
 __pycache__/
 db.sqlite3
+.env
+certificates/
+.well-known/
